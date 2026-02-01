@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    public GameObject bulletPrefabs;
     public float shootingInterval;
     private float lastBulletTime;
+    public Vector3 bulletOffset;
 
     // Singleton pattern
     public static PlayerShooting instance; 
@@ -26,7 +27,6 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            // SỬA LỖI 1: Thêm dấu trừ (-) vào giữa Time.time và lastBulletTime
             if (Time.time - lastBulletTime > shootingInterval) 
             {
                 ShootBullet();
@@ -37,7 +37,6 @@ public class PlayerShooting : MonoBehaviour
 
     private void ShootBullet()
     {
-        // SỬA LỖI 2: Sửa 'bulletPrefabs' thành 'bulletPrefab' (bỏ chữ s)
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        var bullet = Instantiate (bulletPrefabs, transform.position + bulletOffset, transform.rotation);
     }
 }
