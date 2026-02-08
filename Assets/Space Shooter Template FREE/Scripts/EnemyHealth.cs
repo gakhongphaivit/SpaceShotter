@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+// Kế thừa từ lớp Health
+public class EnemyHealth : Health 
 {
-    public GameObject explosionPrefab;
-
-    private void OnTriggerEnter2D(Collider2D collision) => Die();
-
-    private void Die()
+    // Ghi đè phương thức Die() để thêm logic riêng cho Enemy
+    protected override void Die()
     {
-        var explosion = Instantiate(explosionPrefab, transform.position,
-        transform.rotation);
-        Destroy(explosion, 1);
-        Destroy(gameObject);
+        base.Die(); // Gọi phương thức Die() của lớp Health (xử lý nổ, hủy đối tượng)
+        Debug.Log("Enemy died"); // Thêm logic riêng
     }
+    
+    // Các logic khác như explosionPrefab, OnTriggerEnter2D, TakeDamage 
+    // đã được tự động kế thừa từ lớp Health.
 }
